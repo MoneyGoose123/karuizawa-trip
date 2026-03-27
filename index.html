@@ -4,533 +4,678 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>軽井沢 旅のしおり｜2026.3.28</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --green: #3a6b47;
-      --light-green: #e8f0ea;
-      --accent: #7aab8a;
-      --text: #2c2c2c;
-      --muted: #6b7b6e;
-      --bg: #f7f9f7;
-      --white: #ffffff;
-      --border: #d0e0d4;
-    }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Hiragino Kaku Gothic Pro', 'Noto Sans JP', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
+      font-family: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic Pro', sans-serif;
+      background: #0f1a14;
+      color: #f0ede6;
+      min-height: 100vh;
     }
 
-    /* ヘッダー */
-    header {
-      background: var(--green);
-      color: white;
-      text-align: center;
-      padding: 48px 24px 40px;
+    /* ━━━ HERO ━━━ */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 48px 28px;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 80% 20%, rgba(120,200,140,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 10% 90%, rgba(60,120,100,0.22) 0%, transparent 50%),
+        linear-gradient(160deg, #0d1f18 0%, #0f2b1e 40%, #111a16 100%);
     }
 
-    header .label {
+    .hero-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(80px, 28vw, 220px);
+      color: rgba(255,255,255,0.025);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: -4px;
+      font-style: italic;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       font-size: 11px;
       letter-spacing: 4px;
       text-transform: uppercase;
-      opacity: 0.75;
-      margin-bottom: 12px;
-    }
-
-    header h1 {
-      font-size: clamp(26px, 6vw, 40px);
+      color: #7ecf9b;
+      margin-bottom: 20px;
       font-weight: 700;
-      letter-spacing: 2px;
-      margin-bottom: 10px;
     }
 
-    header .subtitle {
-      font-size: 14px;
-      opacity: 0.85;
-      letter-spacing: 1px;
+    .hero-badge::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: #7ecf9b;
     }
 
-    header .date-badge {
-      display: inline-block;
-      margin-top: 20px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 100px;
-      padding: 6px 20px;
-      font-size: 13px;
-      letter-spacing: 2px;
-    }
-
-    /* メインコンテンツ */
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 16px 60px;
-    }
-
-    /* セクション共通 */
-    .section {
-      margin-top: 40px;
-    }
-
-    .section-title {
-      font-size: 12px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 10vw, 72px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1px;
       margin-bottom: 16px;
+      color: #f5f0e8;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: #7ecf9b;
+    }
+
+    .hero-sub {
+      font-size: 13px;
+      color: rgba(240,237,230,0.55);
+      letter-spacing: 2px;
+      margin-bottom: 36px;
+    }
+
+    .hero-chips {
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
       gap: 8px;
     }
 
-    .section-title::after {
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 12px;
+      color: rgba(240,237,230,0.8);
+      backdrop-filter: blur(8px);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 24px;
+      right: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+      animation: scrollAnim 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollAnim {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 0.8; transform: scaleY(1.2); }
+    }
+
+    /* ━━━ MAIN ━━━ */
+    .main {
+      background: #f5f0e8;
+      color: #1a1a1a;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ━━━ ROUTE STRIP ━━━ */
+    .route-strip {
+      background: #1a2e22;
+      color: #f5f0e8;
+      padding: 28px 20px;
+      overflow-x: auto;
+    }
+
+    .route-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      font-size: 13px;
+    }
+
+    .route-stop {
+      font-weight: 900;
+      color: #7ecf9b;
+    }
+
+    .route-via {
+      font-size: 10px;
+      color: rgba(245,240,232,0.45);
+      letter-spacing: 1px;
+    }
+
+    .route-arrow {
+      color: rgba(245,240,232,0.3);
+      font-size: 10px;
+      margin: 0 2px;
+    }
+
+    /* ━━━ SECTION ━━━ */
+    .section {
+      padding-top: 52px;
+    }
+
+    .sec-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #3a8c5c;
+      margin-bottom: 28px;
+    }
+
+    .sec-label::after {
       content: '';
       flex: 1;
       height: 1px;
-      background: var(--border);
+      background: #ddd;
     }
 
-    /* ルートカード */
-    .route-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 24px;
-      font-size: 14px;
-      color: var(--muted);
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .route-card .arrow {
-      color: var(--accent);
-      font-size: 18px;
-    }
-
-    .route-card .spot {
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .route-card .note {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /* タイムライン */
+    /* ━━━ TIMELINE ━━━ */
     .timeline {
       position: relative;
-      padding-left: 56px;
     }
 
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 22px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--border);
+    .tl-item {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 0 20px;
+      margin-bottom: 6px;
     }
 
-    .timeline-item {
-      position: relative;
-      margin-bottom: 24px;
+    .tl-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
     }
 
-    .timeline-item:last-child {
-      margin-bottom: 0;
+    .tl-time {
+      font-size: 13px;
+      font-weight: 900;
+      color: #3a8c5c;
+      line-height: 1;
+      padding-top: 20px;
+      text-align: center;
+      width: 100%;
     }
 
-    .timeline-dot {
-      position: absolute;
-      left: -42px;
-      top: 14px;
-      width: 12px;
-      height: 12px;
+    .tl-line-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 6px 0;
+    }
+
+    .tl-dot {
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      background: var(--accent);
-      border: 2px solid var(--white);
-      box-shadow: 0 0 0 2px var(--accent);
+      background: #3a8c5c;
+      flex-shrink: 0;
     }
 
-    .timeline-dot.star {
-      background: var(--green);
-      box-shadow: 0 0 0 2px var(--green);
+    .tl-dot.large {
       width: 14px;
       height: 14px;
-      left: -43px;
+      background: #1a5c38;
+      box-shadow: 0 0 0 3px #c8e8d4;
     }
 
-    .timeline-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 20px;
+    .tl-connector {
+      width: 2px;
+      flex: 1;
+      background: #dde8e2;
+      min-height: 12px;
     }
 
-    .timeline-card:hover {
-      border-color: var(--accent);
-      transition: border-color 0.2s;
+    .tl-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 8px;
+      border: 1px solid #eaeaea;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .timeline-time {
-      font-size: 12px;
+    .tl-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    }
+
+    .tl-card.featured {
+      background: linear-gradient(135deg, #1a2e22, #2a4a34);
+      border-color: transparent;
+      color: #f5f0e8;
+    }
+
+    .tl-card.featured .tl-card-title { color: #7ecf9b; }
+    .tl-card.featured .tl-card-desc { color: rgba(245,240,232,0.75); }
+
+    .tl-card-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 9px;
       font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 1px;
-      margin-bottom: 4px;
-    }
-
-    .timeline-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .timeline-desc {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .tag {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      padding: 2px 8px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 3px 10px;
       border-radius: 100px;
       margin-bottom: 8px;
     }
 
-    .tag-must {
-      background: #fef3e2;
-      color: #c17c1a;
+    .tag-stop  { background: #fff3cd; color: #7c5400; }
+    .tag-lunch { background: #d4edda; color: #1a5928; }
+    .tag-walk  { background: #cce5ff; color: #0040a0; }
+    .tag-shop  { background: #e2d9f3; color: #4a1c80; }
+    .tag-drive { background: #f0f0f0; color: #555; }
+    .tag-food  { background: #ffe0cc; color: #8a3500; }
+    .tag-must  { background: #7ecf9b; color: #0f2b1e; }
+
+    .tl-card-title {
+      font-size: 17px;
+      font-weight: 900;
+      margin-bottom: 6px;
+      line-height: 1.3;
     }
 
-    .tag-lunch {
-      background: #e8f5e9;
-      color: #2e7d32;
+    .tl-card-desc {
+      font-size: 13px;
+      color: #555;
+      line-height: 1.7;
     }
 
-    .tag-walk {
-      background: #e3f2fd;
-      color: #1565c0;
-    }
-
-    .tag-shop {
-      background: #f3e5f5;
-      color: #7b1fa2;
-    }
-
-    .tag-cafe {
-      background: #fce4ec;
-      color: #c2185b;
-    }
-
-    .tag-dinner {
-      background: #fff8e1;
-      color: #f57f17;
-    }
-
-    /* スポットカード */
-    .spots-grid {
+    /* ━━━ SPOT GRID ━━━ */
+    .spot-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 10px;
     }
 
-    @media (max-width: 500px) {
-      .spots-grid { grid-template-columns: 1fr; }
+    @media (max-width: 420px) {
+      .spot-grid { grid-template-columns: 1fr; }
     }
 
     .spot-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 18px;
+      border-radius: 16px;
+      padding: 20px 18px;
+      background: #fff;
+      border: 1px solid #eaeaea;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .spot-card .spot-icon {
-      font-size: 24px;
-      margin-bottom: 8px;
+    .spot-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 36px rgba(0,0,0,0.1);
     }
 
-    .spot-card .spot-name {
+    .spot-card:nth-child(1) { background: linear-gradient(135deg, #f0faf4, #e0f5ea); border-color: #c0e8ce; }
+    .spot-card:nth-child(2) { background: linear-gradient(135deg, #faf5e8, #f5edd4); border-color: #e8d8a8; }
+    .spot-card:nth-child(3) { background: linear-gradient(135deg, #e8f4ff, #d4eaff); border-color: #a8ccf0; }
+    .spot-card:nth-child(4) { background: linear-gradient(135deg, #f5eaff, #ecd4ff); border-color: #c8a0e8; }
+    .spot-card:nth-child(5) { background: linear-gradient(135deg, #fff0e8, #ffddc8); border-color: #f0b898; }
+    .spot-card:nth-child(6) { background: linear-gradient(135deg, #f0f8e8, #e0f0d0); border-color: #b0d890; }
+
+    .spot-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+
+    .spot-name {
       font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 4px;
+      font-weight: 900;
+      margin-bottom: 5px;
     }
 
-    .spot-card .spot-desc {
+    .spot-desc {
       font-size: 12px;
-      color: var(--muted);
+      color: #555;
+      line-height: 1.65;
+    }
+
+    /* ━━━ NOTES ━━━ */
+    .notes-card {
+      background: #1a2e22;
+      border-radius: 20px;
+      padding: 28px 24px;
+      color: #f5f0e8;
+    }
+
+    .notes-card h3 {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #7ecf9b;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .notes-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .notes-card ul li {
+      display: flex;
+      gap: 10px;
+      font-size: 13px;
+      color: rgba(245,240,232,0.8);
       line-height: 1.6;
     }
 
-    /* 注意事項 */
-    .notice-card {
-      background: var(--light-green);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 24px;
-    }
-
-    .notice-card ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .notice-card ul li {
-      font-size: 13px;
-      color: var(--text);
-      padding: 5px 0;
-      padding-left: 18px;
-      position: relative;
-    }
-
-    .notice-card ul li::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
+    .notes-card ul li::before {
+      content: '→';
+      color: #7ecf9b;
       font-weight: 700;
+      flex-shrink: 0;
     }
 
-    /* フッター */
+    /* ━━━ FOOTER ━━━ */
     footer {
+      background: #0f1a14;
       text-align: center;
-      padding: 32px;
-      font-size: 12px;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
+      padding: 40px;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: rgba(245,240,232,0.25);
+      text-transform: uppercase;
     }
   </style>
 </head>
 <body>
 
-  <!-- ヘッダー -->
-  <header>
-    <p class="label">Travel Plan</p>
-    <h1>軽井沢 旅のしおり</h1>
-    <p class="subtitle">桐生・高崎 発 ／ 碓氷峠越え ／ 軽井沢 一日旅</p>
-    <div class="date-badge">2026 / 03 / 28（土）</div>
-  </header>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg-text">Karuizawa</div>
 
-  <div class="container">
+    <div class="hero-badge">Travel Plan · 2026</div>
+    <h1>軽井沢へ、<br><em>行ってきます。</em></h1>
+    <p class="hero-sub">2026 / 03 / 28（土）· 桐生・高崎 発</p>
 
-    <!-- ルート概要 -->
-    <div class="section">
-      <p class="section-title">Route</p>
-      <div class="route-card">
-        <span class="spot">桐生</span>
-        <span class="arrow">→</span>
-        <span class="spot">高崎</span>
-        <span class="note">（上信越道）</span>
-        <span class="arrow">→</span>
-        <span class="spot">めがね橋</span>
-        <span class="note">（国道18号）</span>
-        <span class="arrow">→</span>
-        <span class="spot">軽井沢</span>
-        <span class="arrow">→</span>
-        <span class="spot">高崎</span>
-        <span class="note">（夕食後 解散）</span>
+    <div class="hero-chips">
+      <span class="chip">🧱 めがね橋</span>
+      <span class="chip">🌿 ハルニレテラス</span>
+      <span class="chip">🪨 雲場池</span>
+      <span class="chip">🛍️ アウトレット</span>
+    </div>
+
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- ルートストリップ -->
+    <div class="route-strip">
+      <div class="route-inner">
+        <span class="route-stop">桐生</span>
+        <span class="route-arrow">›</span>
+        <span class="route-stop">高崎</span>
+        <span class="route-via">上信越道</span>
+        <span class="route-arrow">›</span>
+        <span class="route-stop">松井田妙義IC</span>
+        <span class="route-arrow">›</span>
+        <span class="route-stop">めがね橋</span>
+        <span class="route-via">国道18号</span>
+        <span class="route-arrow">›</span>
+        <span class="route-stop">軽井沢</span>
+        <span class="route-arrow">›</span>
+        <span class="route-stop">高崎（夕食）</span>
       </div>
     </div>
 
-    <!-- タイムライン -->
-    <div class="section">
-      <p class="section-title">Schedule</p>
-      <div class="timeline">
+    <div class="container">
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <p class="timeline-time">11:00</p>
-            <p class="timeline-title">高崎 合流</p>
-            <p class="timeline-desc">高崎市中泉町付近で集合。車に乗り込んで出発。</p>
+      <!-- スケジュール -->
+      <div class="section">
+        <p class="sec-label">Schedule</p>
+        <div class="timeline">
+
+          <div class="tl-item">
+            <div class="tl-left">
+              <div class="tl-time">11:00</div>
+              <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-connector"></div></div>
+            </div>
+            <div>
+              <div class="tl-card">
+                <span class="tl-card-tag tag-stop">START</span>
+                <p class="tl-card-title">高崎 合流</p>
+                <p class="tl-card-desc">高崎市中泉町付近で集合。いざ出発。</p>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot star"></div>
-          <div class="timeline-card">
-            <p class="tag tag-must">★ MUST STOP</p>
-            <p class="timeline-time">12:00</p>
-            <p class="timeline-title">めがね橋（碓氷第三橋梁）</p>
-            <p class="timeline-desc">
-              高崎ICから上信越道に乗り、松井田妙義ICで降りて約10分。
-              明治時代の赤レンガ製アーチ橋で、橋の上まで歩いて登れる。
-              景色・写真映えともに抜群の穴場スポット。所要30〜40分。
-            </p>
+          <div class="tl-item">
+            <div class="tl-left">
+              <div class="tl-time">12:00</div>
+              <div class="tl-line-wrap"><div class="tl-dot large"></div><div class="tl-connector"></div></div>
+            </div>
+            <div>
+              <div class="tl-card featured">
+                <span class="tl-card-tag tag-must">★ MUST</span>
+                <p class="tl-card-title">めがね橋（碓氷第三橋梁）</p>
+                <p class="tl-card-desc">
+                  高崎ICから上信越道→松井田妙義ICで降りて約10分。明治時代の赤レンガ製アーチ橋。橋の上まで歩いて登れて絶景が広がる。知名度のわりに穴場感たっぷり。所要30〜40分。
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <p class="timeline-time">12:45</p>
-            <p class="timeline-title">国道18号 碓氷峠越え</p>
-            <p class="timeline-desc">
-              めがね橋から国道18号（旧中山道）で碓氷峠を越えて軽井沢へ。
-              山道の景色を楽しみながら約45分のドライブ。
-            </p>
+          <div class="tl-item">
+            <div class="tl-left">
+              <div class="tl-time">12:45</div>
+              <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-connector"></div></div>
+            </div>
+            <div>
+              <div class="tl-card">
+                <span class="tl-card-tag tag-drive">DRIVE</span>
+                <p class="tl-card-title">国道18号 碓氷峠越え</p>
+                <p class="tl-card-desc">旧中山道の峠道を走って軽井沢へ。山の景色を楽しみながら約45分。</p>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <p class="tag tag-lunch">LUNCH</p>
-            <p class="timeline-time">13:30</p>
-            <p class="timeline-title">ハルニレテラス</p>
-            <p class="timeline-desc">
-              星野リゾート内、湯川沿いの複合施設。木立に囲まれた落ち着いた雰囲気。
-              NATUR DINING など複数店舗あり。混雑するため事前予約推奨。
-            </p>
+          <div class="tl-item">
+            <div class="tl-left">
+              <div class="tl-time">13:45</div>
+              <div class="tl-line-wrap"><div class="tl-dot large"></div><div class="tl-connector"></div></div>
+            </div>
+            <div>
+              <div class="tl-card">
+                <span class="tl-card-tag tag-lunch">LUNCH</span>
+                <p class="tl-card-title">ハルニレテラス</p>
+                <p class="tl-card-desc">
+                  星野リゾート内、湯川沿いの複合施設。木立に囲まれた洗練された空間で、テラス席は雰囲気抜群。NATUR DINING が人気。事前予約推奨。
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <p class="tag tag-walk">WALK</p>
-            <p class="timeline-time">15:00</p>
-            <p class="timeline-title">雲場池</p>
-            <p class="timeline-desc">
-              軽井沢随一の静かな池。一周徒歩約20〜30分。
-              3月下旬は空気が澄んでいて気持ちよく歩ける。入場無料。
-            </p>
+          <div class="tl-item">
+            <div class="tl-left">
+              <div class="tl-time">15:15</div>
+              <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-connector"></div></div>
+            </div>
+            <div>
+              <div class="tl-card">
+                <span class="tl-card-tag tag-walk">WALK</span>
+                <p class="tl-card-title">雲場池</p>
+                <p class="tl-card-desc">静かな池を一周、約20〜30分。入場無料。3月末は空気が澄んでいて気持ちいい。</p>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <p class="tag tag-walk">WALK</p>
-            <p class="timeline-time">15:45</p>
-            <p class="timeline-title">旧軽井沢銀座通り</p>
-            <p class="timeline-desc">
-              食べ歩き・ショッピングの定番エリア。沢屋のジャム、フランス菓子16区など。
-              人は多いが歩くだけでも楽しめる軽井沢の中心街。
-            </p>
+          <div class="tl-item">
+            <div class="tl-left">
+              <div class="tl-time">16:00</div>
+              <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-connector"></div></div>
+            </div>
+            <div>
+              <div class="tl-card">
+                <span class="tl-card-tag tag-walk">WALK</span>
+                <p class="tl-card-title">旧軽井沢銀座通り</p>
+                <p class="tl-card-desc">沢屋のジャム・フランス菓子16区など。食べ歩きしながらブラブラ。</p>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot star"></div>
-          <div class="timeline-card">
-            <p class="tag tag-shop">SHOPPING</p>
-            <p class="timeline-time">16:30</p>
-            <p class="timeline-title">軽井沢プリンスショッピングプラザ</p>
-            <p class="timeline-desc">
-              国内最大級のアウトレット。アウトドア・ファッション系が充実。
-              土曜の午後は混雑するが、16時台は少し落ち着く傾向あり。
-              駐車場は早めに確保を。1〜1.5時間を目安に。
-            </p>
+          <div class="tl-item">
+            <div class="tl-left">
+              <div class="tl-time">17:00</div>
+              <div class="tl-line-wrap"><div class="tl-dot large"></div><div class="tl-connector"></div></div>
+            </div>
+            <div>
+              <div class="tl-card">
+                <span class="tl-card-tag tag-shop">SHOPPING</span>
+                <p class="tl-card-title">軽井沢プリンスショッピングプラザ</p>
+                <p class="tl-card-desc">
+                  国内最大級のアウトレット。アウトドア・ファッション系が充実。17〜18時台がやや混雑のピーク落ち着き時間帯。1.5〜2時間ほど滞在。
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <p class="timeline-time">18:00</p>
-            <p class="timeline-title">軽井沢 出発 → 高崎へ</p>
-            <p class="timeline-desc">碓氷軽井沢ICから上信越道で高崎へ。所要約40分。</p>
+          <div class="tl-item">
+            <div class="tl-left">
+              <div class="tl-time">19:00</div>
+              <div class="tl-line-wrap"><div class="tl-dot"></div><div class="tl-connector"></div></div>
+            </div>
+            <div>
+              <div class="tl-card">
+                <span class="tl-card-tag tag-drive">DRIVE</span>
+                <p class="tl-card-title">軽井沢 出発 → 高崎へ</p>
+                <p class="tl-card-desc">碓氷軽井沢ICから上信越道。約40分で高崎へ。</p>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <p class="tag tag-dinner">DINNER</p>
-            <p class="timeline-time">18:50</p>
-            <p class="timeline-title">高崎 夕食</p>
-            <p class="timeline-desc">
-              高崎パスタ（地元名物）／ 焼肉 牛蔵（高崎駅西口）／ 個室居酒屋 など。
-              旅の振り返りをしながらゆっくりと。
-            </p>
+          <div class="tl-item">
+            <div class="tl-left">
+              <div class="tl-time">20:00</div>
+              <div class="tl-line-wrap"><div class="tl-dot large"></div><div class="tl-connector"></div></div>
+            </div>
+            <div>
+              <div class="tl-card">
+                <span class="tl-card-tag tag-food">DINNER</span>
+                <p class="tl-card-title">高崎 夕食</p>
+                <p class="tl-card-desc">
+                  高崎パスタ（地元名物）／ 焼肉 牛蔵（駅西口）／ 個室居酒屋 など。旅の話をしながらゆっくりと。
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <p class="timeline-time">19:30〜</p>
-            <p class="timeline-title">解散</p>
-            <p class="timeline-desc">高崎にて解散。</p>
+          <div class="tl-item">
+            <div class="tl-left">
+              <div class="tl-time">21:30〜</div>
+              <div class="tl-line-wrap"><div class="tl-dot"></div></div>
+            </div>
+            <div>
+              <div class="tl-card">
+                <span class="tl-card-tag tag-stop">END</span>
+                <p class="tl-card-title">高崎 解散</p>
+                <p class="tl-card-desc">お疲れさまでした。また行きましょう。</p>
+              </div>
+            </div>
           </div>
-        </div>
 
-      </div>
-    </div>
-
-    <!-- スポット一覧 -->
-    <div class="section">
-      <p class="section-title">Highlights</p>
-      <div class="spots-grid">
-        <div class="spot-card">
-          <p class="spot-icon">🧱</p>
-          <p class="spot-name">めがね橋</p>
-          <p class="spot-desc">明治の赤レンガ橋。橋の上まで歩いて登れる絶景穴場スポット。</p>
-        </div>
-        <div class="spot-card">
-          <p class="spot-icon">🌿</p>
-          <p class="spot-name">ハルニレテラス</p>
-          <p class="spot-desc">湯川沿いの洗練された複合施設。ランチに最適な落ち着く空間。</p>
-        </div>
-        <div class="spot-card">
-          <p class="spot-icon">🪨</p>
-          <p class="spot-name">雲場池</p>
-          <p class="spot-desc">静かな池の周りを散策できる。軽井沢でも特に自然感が強い場所。</p>
-        </div>
-        <div class="spot-card">
-          <p class="spot-icon">🛍️</p>
-          <p class="spot-name">旧軽井沢銀座</p>
-          <p class="spot-desc">老舗ジャム・菓子店が並ぶ食べ歩きエリア。軽井沢の定番。</p>
-        </div>
-        <div class="spot-card">
-          <p class="spot-icon">🏬</p>
-          <p class="spot-name">軽井沢アウトレット</p>
-          <p class="spot-desc">国内最大級のショッピングプラザ。アウトドア・ファッション充実。</p>
-        </div>
-        <div class="spot-card">
-          <p class="spot-icon">🍽️</p>
-          <p class="spot-name">高崎パスタ</p>
-          <p class="spot-desc">高崎名物。帰りの夕食に地元グルメを楽しんで締めくくり。</p>
         </div>
       </div>
-    </div>
 
-    <!-- 注意事項 -->
-    <div class="section">
-      <p class="section-title">Notes</p>
-      <div class="notice-card">
-        <ul>
-          <li>3月末の軽井沢は最高気温10℃前後。防寒着・コートは必携。</li>
-          <li>歩く場面が多いため、歩きやすい靴を推奨。</li>
-          <li>ハルニレテラスのランチは事前予約しておくと安心。</li>
-          <li>アウトレット（プリンスショッピングプラザ）の駐車場は土曜混雑。早めの確保を。</li>
-          <li>帰路の碓氷軽井沢IC周辺は夕方に渋滞しやすい。18時前後の出発がベター。</li>
-          <li>めがね橋の駐車場は無料だが台数が少なめ。到着後すぐ確保を。</li>
-        </ul>
+      <!-- スポット -->
+      <div class="section">
+        <p class="sec-label">Highlights</p>
+        <div class="spot-grid">
+          <div class="spot-card">
+            <span class="spot-icon">🧱</span>
+            <p class="spot-name">めがね橋</p>
+            <p class="spot-desc">明治の赤レンガ橋。橋上まで歩けて絶景。SNS映え確実の穴場。</p>
+          </div>
+          <div class="spot-card">
+            <span class="spot-icon">🌿</span>
+            <p class="spot-name">ハルニレテラス</p>
+            <p class="spot-desc">湯川沿いの洗練施設。ランチに最適な大人な空間。</p>
+          </div>
+          <div class="spot-card">
+            <span class="spot-icon">🪨</span>
+            <p class="spot-name">雲場池</p>
+            <p class="spot-desc">静かな池を散策。自然の中でのんびりできる軽井沢の名所。</p>
+          </div>
+          <div class="spot-card">
+            <span class="spot-icon">🛍️</span>
+            <p class="spot-name">旧軽井沢銀座</p>
+            <p class="spot-desc">老舗ジャム・菓子が並ぶ食べ歩きエリア。軽井沢といえばここ。</p>
+          </div>
+          <div class="spot-card">
+            <span class="spot-icon">🏬</span>
+            <p class="spot-name">軽井沢アウトレット</p>
+            <p class="spot-desc">国内最大級。アウトドア・ファッション系が充実。</p>
+          </div>
+          <div class="spot-card">
+            <span class="spot-icon">🍽️</span>
+            <p class="spot-name">高崎パスタ</p>
+            <p class="spot-desc">高崎名物。帰りの夕食に地元グルメで旅を締めくくる。</p>
+          </div>
+        </div>
       </div>
-    </div>
 
+      <!-- 注意事項 -->
+      <div class="section">
+        <p class="sec-label">Notes</p>
+        <div class="notes-card">
+          <h3>持ち物・注意点</h3>
+          <ul>
+            <li>3月末の軽井沢は最高気温10℃前後。防寒着・コート必携。</li>
+            <li>歩く場面が多いため、スニーカー等の歩きやすい靴を推奨。</li>
+            <li>ハルニレテラスのランチは事前予約がおすすめ。</li>
+            <li>アウトレット駐車場は土曜混雑。17時前後の到着がベター。</li>
+            <li>めがね橋の駐車場は無料・台数少なめ。到着後すぐ確保を。</li>
+            <li>帰路の碓氷軽井沢IC周辺、夕方は渋滞しやすい。19時以降はやや落ち着く。</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <footer>
-    軽井沢 旅のしおり｜2026.03.28
+    Karuizawa · 2026.03.28 · Travel Plan
   </footer>
 
 </body>
